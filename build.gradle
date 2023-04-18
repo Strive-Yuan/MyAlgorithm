@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.6.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.jetbrains.kotlin.jvm' version '1.5.30' // 确保添加 Kotlin
 }
 
 group 'org.example'
@@ -17,11 +18,16 @@ java {
 
 //gradle文档:https://docs.gradle.org/current/userguide/userguide.html
 dependencies {
+    implementation fileTree(dir: 'libs', include: '**/*.jar')
+
+    implementation 'net.mamoe:mirai-core:2.9.1'
+    implementation group: "net.mamoe", name: "mirai-login-solver-sakura", version: "0.0.10"
+
     // Spring
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-web:3.0.4'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc:3.0.4'
 //    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-    implementation 'org.springframework.boot:spring-boot-starter-json'
+    implementation 'org.springframework.boot:spring-boot-starter-json:3.0.4'
 //    implementation 'org.springframework.boot:spring-boot-starter-test'
 //    implementation 'org.springframework.boot:spring-boot-starter-validation'
 //    implementation 'org.redisson:redisson-spring-boot-starter:3.16.8'
@@ -41,7 +47,7 @@ dependencies {
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
 
     //zookeeper
-    implementation (group: 'org.apache.zookeeper', name: 'zookeeper', version: '3.4.6'){
+    implementation(group: 'org.apache.zookeeper', name: 'zookeeper', version: '3.4.6') {
         exclude group: 'org.slf4j'
     }
 
@@ -49,7 +55,7 @@ dependencies {
     implementation group: 'org.apache.kafka', name: 'kafka_2.13', version: '3.3.2'
 
     // Redisson
-    implementation(group: 'org.redisson', name: 'redisson', version: '3.16.8') {
+    implementation(group: 'org.redisson', name: 'redisson', version: '3.20.0') {
         exclude group: 'io.reactivex.rxjava3'
         exclude group: 'io.projectreactor'
         exclude group: 'org.jodd'//仅用于 LiveObject
@@ -68,6 +74,9 @@ dependencies {
     // POI
     implementation group: 'org.apache.poi', name: 'poi', version: '5.2.3'
     implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '5.2.3'
+
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.2'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.2'
 
     runtimeOnly 'mysql:mysql-connector-java'
 }
